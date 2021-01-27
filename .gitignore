@@ -1,0 +1,11 @@
+node_modules
+.env.local
+.env.rinkeby
+.env.wallet
+.env.provider
+.env.provider.backup
+contract-addr.json
+job.json
+
+#Hardhat files
+cache

@@ -1,0 +1,47 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ChainlinkClient",
+  "sourceName": "contracts/ChainlinkClient.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ChainlinkRequested",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ChainlinkFulfilled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ChainlinkCancelled",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x60806040526001600455348015601457600080fd5b5060358060226000396000f3006080604052600080fd00a165627a7a723058200f6efbafe94c27665879a6f87861fd9522a31368332565c43f1cb9ea46bd2aca0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058200f6efbafe94c27665879a6f87861fd9522a31368332565c43f1cb9ea46bd2aca0029",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
