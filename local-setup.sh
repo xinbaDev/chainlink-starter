@@ -42,8 +42,11 @@ check_docker_run_result
 check "checking the postgres db..." "db setup done" check_db 3
 
 title "7. Set up chainlink node"
-docker run --net=host -v ~/.chainlink-local:/chainlink -d --env-file=.env.local --name chainlink-local-node \
-smartcontract/chainlink:latest local n -p /chainlink/.password -a /chainlink/.api >/dev/null
+cp $(pwd)/credential/.api.example $(pwd)/credential/.api
+cp $(pwd)/credential/.password.example $(pwd)/credential/.password
+
+docker run --net=host -v $(pwd)/credential:/chainlink/credential -d --env-file=.env.local --name chainlink-local-node \
+smartcontract/chainlink:latest local n -p /chainlink/credential/.password -a /chainlink/credential/.api >/dev/null
 check_docker_run_result
 check "checking the chainlink node..." "node setup done" check_node 3
 
