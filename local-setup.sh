@@ -4,11 +4,13 @@ source common.sh
 
 source cleanup.sh
 
-if [ -f .env.provider ]; then
-    rm .env.provider
+if [ -f ./env/.env.provider ]; then
+    rm ./env/.env.provider
 fi
-echo "PROVIDER_HTTP_URL=http://localhost:8545" > .env.provider
-echo "PROVIDER_WS_URL=ws://localhost:8545" >> .env.provider
+echo "PROVIDER_HTTP_URL=http://localhost:8545" > ./env/.env.provider
+echo "PROVIDER_WS_URL=ws://localhost:8545" >> ./env/.env.provider
+
+echo "LINKNODE_URL=http://localhost:6688" > ./env/.env.linknode
 
 title "1. Building docker image, this may take a while in the first run"
 docker build -t chainlink-local-dev .
@@ -19,7 +21,7 @@ check_docker_run_result
 check "checking the testnet..." "testnet setup done" check_testnet 3 
 
 title "3. Generate a wallet if necessary and get some ethers"
-if [ ! -f .env.wallet ]; then
+if [ ! -f ./env/.env.wallet ]; then
     docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
     node scripts/generate-wallet.js
 fi
@@ -45,7 +47,7 @@ title "7. Set up chainlink node"
 cp $(pwd)/credential/.api.example $(pwd)/credential/.api
 cp $(pwd)/credential/.password.example $(pwd)/credential/.password
 
-docker run --net=host -v $(pwd)/credential:/chainlink/credential -d --env-file=.env.local --name chainlink-local-node \
+docker run --net=host -v $(pwd)/credential:/chainlink/credential -d --env-file=./env/.env.local --name chainlink-local-node \
 smartcontract/chainlink:latest local n -p /chainlink/credential/.password -a /chainlink/credential/.api >/dev/null
 check_docker_run_result
 check "checking the chainlink node..." "node setup done" check_node 3

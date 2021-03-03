@@ -1,9 +1,9 @@
-const { throws } = require("assert");
+require("dotenv").config({ path: "./env/.env.linknode" });
 const axios = require("axios");
 const fs = require("fs");
 
 const CREDENTIAL_PATH = "./credential/.api";
-const linknode_url = "http://localhost:6688";
+const linknode_url = process.env.LINKNODE_URL;
 
 function parseCredential(src, options) {
   const credential = [];

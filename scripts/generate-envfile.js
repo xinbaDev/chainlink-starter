@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV == "local") {
-  require("dotenv").config({ path: ".env.local.template" });
+  require("dotenv").config({ path: "./env/.env.local.template" });
 } else {
-  require("dotenv").config({ path: ".env.rinkeby.template" });
+  require("dotenv").config({ path: "./env/.env.rinkeby.template" });
 }
 
 require("dotenv").config({ path: ".env.provider" });

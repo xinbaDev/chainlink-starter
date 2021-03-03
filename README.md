@@ -30,8 +30,11 @@ You will see an example job added in the job page.
 
 ### On Rinkeby testnet
 
-1. Go to [Infura](https://infura.io/), create an account and get Rinkeby provider URL(one for https, one for websocket)
-2. Create/Replace both URL in your `.env.provider` file with the URL you got from Infura
+Before proceeding, make sure you follow the instructions and successfully setup the chianlink infrastructure on aws.
+
+1. Replace the endpoint in ```/env/.env.linknode with your own
+2. Go to [Infura](https://infura.io/), create an account and get Rinkeby provider URL(one for https, one for websocket)
+3. Create/Replace both URL in your `.env.provider` file with the URL you got from Infura
 
 ```bash
 # it should look something like this
@@ -39,11 +42,11 @@ PROVIDER_HTTP_URL=https://rinkeby.infura.io/v3/{YOUR_KEY}
 PROVIDER_WS_URL=wss://rinkeby.infura.io/ws/v3/{YOUR_KEY}
 ```
 
-3. Run the following script
+4. Run the following script
 
 ```bash
 # in the project root folder
-./rinkeby-setup.sh
+./rinkeby-cloud-setup.sh
 ```
 
 Note: The script will ask you to fund the generated wallet, you can get some free ethers from [https://faucet.rinkeby.io](https://faucet.rinkeby.io)

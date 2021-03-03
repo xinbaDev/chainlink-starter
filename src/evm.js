@@ -1,5 +1,5 @@
-require("dotenv").config({ path: ".env.wallet" });
-require("dotenv").config({ path: ".env.provider" });
+require("dotenv").config({ path: "./env/.env.wallet" });
+require("dotenv").config({ path: "./env/.env.provider" });
 const ethers = require("ethers");
 
 if (!process.env.PROVIDER_HTTP_URL) {

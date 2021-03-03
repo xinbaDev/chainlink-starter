@@ -1,4 +1,5 @@
 #!/bin/bash
+# this script is for cloud setup
 
 source common.sh
 
@@ -18,41 +19,22 @@ docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
 node scripts/deploy-linktoken.js
 check_docker_run_result
 
-title "4. Generate .env.rinkeby file"
-docker run --env NODE_ENV='rinkeby' --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
-node scripts/generate-envfile.js
-
-title "5. Set up local database"
-docker run -p 5432:5432 -d -v chainlink_postgres_volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=test \
---name chainlink-local-postgres postgres  >/dev/null
-check_docker_run_result
-check "checking the postgres db..." "db setup done" check_db 3
-
-title "6. Set up chainlink node"
-cp $(pwd)/credential/.api.example $(pwd)/credential/.api
-cp $(pwd)/credential/.password.example $(pwd)/credential/.password
-
-docker run --net=host -v $(pwd)/credential:/chainlink/credential -d --env-file=.env.rinkeby --name chainlink-local-node \
-smartcontract/chainlink:latest local n -p /chainlink/credential/.password -a /chainlink/credential/.api  >/dev/null
-check_docker_run_result
-check "checking the chainlink node..." "node setup done" check_node 3
-
-title "7. Send some ethers to link node"
+title "4. Send some ethers to chainlink node wallet"
 docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
 node scripts/fund-linknode.js
 check_docker_run_result
 
-title "8. Deploy oracle contract and set permission for linknode"
+title "5. Deploy oracle contract and set permission for linknode"
 docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
 node scripts/setup-oracle.js
 check_docker_run_result
 
-title "9. Deploy test consumer contract and send it some link tokens"
+title "6. Deploy test consumer contract and send it some link tokens"
 docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
 node scripts/setup-consumer.js
 check_docker_run_result
 
-title "10. Create an example job in chainlink node"
+title "7. Create an example job in chainlink node"
 docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
 node scripts/create-example-job.js
 check_docker_run_result

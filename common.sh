@@ -59,7 +59,7 @@ if [ ! -f ./credential/.password ]; then
     echo "test" > ./credential/.password
 fi
 
-if [ ! -f .env.wallet ]; then
+if [ ! -f ./env/env.wallet ]; then
     docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
     node scripts/generate-wallet.js
 fi
