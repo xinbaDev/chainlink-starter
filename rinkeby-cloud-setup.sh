@@ -12,6 +12,7 @@ title "2. Before continuing the setup process, please make sure the testnet wall
 echo "Your testnet wallet address:" 
 docker run --net=host -v $(pwd):/chainlink-dev/ -it chainlink-local-dev \
     node scripts/display-wallet-address.js
+check_docker_run_result
 read -p "If it is done, press enter to continue"
 
 title "3. Deploy linktoken contract to rinkeby testnet"
